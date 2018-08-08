@@ -1,5 +1,6 @@
 ﻿using Excellency.Interfaces;
 using Excellency.Models;
+using Excellency.Persistence;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +8,12 @@ namespace Excellency.Services
 {
     public class BranchService : IBranch
     {
+        private EASDbContext _dbContext;
+
+        public BranchService(EASDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public void Add(Branch branch)
         {
             throw new NotImplementedException();
