@@ -1,8 +1,9 @@
 ﻿using Excellency.Interfaces;
 using Excellency.Models;
 using Excellency.Persistence;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Excellency.Services
 {
@@ -16,37 +17,45 @@ namespace Excellency.Services
         }
         public void Add(Branch branch)
         {
-            throw new NotImplementedException();
+            _dbContext.Add(branch);
+            _dbContext.SaveChanges();
         }
 
         public IEnumerable<Branch> Branches()
         {
-            throw new NotImplementedException();
+            return _dbContext.Branches.Where(x => x.IsDeleted == false);
         }
 
         public IEnumerable<Company> Companies()
         {
-            throw new NotImplementedException();
+            return _dbContext.Companies.Where(x => x.IsDeleted == false);
         }
 
         public Branch GetBranchById(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Branches.FirstOrDefault(x => x.Id == id);
         }
 
         public Company GetCompanyPerBranch(int id)
         {
-            throw new NotImplementedException();
+            var comp = _dbContext.Branches
+                .Include(c => c.Company)
+                .FirstOrDefault(x => x.Id == id).Company.Id;
+            return _dbContext.Companies.FirstOrDefault(x => x.Id == comp);
         }
 
         public void RemoveById(int Id)
         {
-            throw new NotImplementedException();
+            var branch = _dbContext.Branches.FirstOrDefault(x => x.Id == Id);
+            branch.IsDeleted = true;
+            _dbContext.Entry(branch).State = EntityState.Modified;
+            _dbContext.SaveChanges();
         }
 
         public void Update(Branch branch)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(branch).State = EntityState.Modified;
+            _dbContext.SaveChanges();
         }
     }
 }

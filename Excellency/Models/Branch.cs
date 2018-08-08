@@ -16,5 +16,7 @@ namespace Excellency.Models
         public DateTime CreationDate { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
+
+        public Company Company { get; set; }
     }
 }

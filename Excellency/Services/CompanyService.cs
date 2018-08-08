@@ -23,7 +23,7 @@ namespace Excellency.Services
 
         public IEnumerable<Company> Companies()
         {
-            return _dbContext.Companies;
+            return _dbContext.Companies.Where(x => x.IsDeleted == false);
         }
 
         public Company GetCompanyById(int id)
@@ -39,7 +39,8 @@ namespace Excellency.Services
         public void RemoveById(int Id)
         {
             var company = _dbContext.Companies.FirstOrDefault(x => x.Id == Id);
-            _dbContext.Companies.Remove(company);
+            company.IsDeleted = true;
+            _dbContext.Entry(company).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _dbContext.SaveChanges();
         }
 
