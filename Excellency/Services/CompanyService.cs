@@ -33,17 +33,20 @@ namespace Excellency.Services
 
         public string GetCompanyLogoUrlById(int id)
         {
-            throw new System.NotImplementedException();
+            return _dbContext.Companies.FirstOrDefault(x => x.Id == id).LogoUrl;
         }
 
         public void RemoveById(int Id)
         {
-            throw new System.NotImplementedException();
+            var company = _dbContext.Companies.FirstOrDefault(x => x.Id == Id);
+            _dbContext.Companies.Remove(company);
+            _dbContext.SaveChanges();
         }
 
         public void Update(Company company)
         {
-            throw new System.NotImplementedException();
+            _dbContext.Entry(company).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _dbContext.SaveChanges();
         }
     }
 }
