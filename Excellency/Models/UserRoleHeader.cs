@@ -5,7 +5,7 @@ namespace Excellency.Models
     public class UserRoleHeader
     {
         public int Id { get; set; }
-        public Account Account { get; set; }
+        public virtual Account Account { get; set; }
 
         public bool IsDeleted { get; set; } = false;
         public string CreatedBy { get; set; }

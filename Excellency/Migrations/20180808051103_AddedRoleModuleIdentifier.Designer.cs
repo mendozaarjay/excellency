@@ -11,9 +11,10 @@ using System;
 namespace Excellency.Migrations
 {
     [DbContext(typeof(EASDbContext))]
-    partial class EASDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180808051103_AddedRoleModuleIdentifier")]
+    partial class AddedRoleModuleIdentifier
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

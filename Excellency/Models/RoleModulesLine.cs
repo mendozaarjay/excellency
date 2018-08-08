@@ -3,7 +3,9 @@
     public class RoleModulesLine
     {
         public int Id { get; set; }
-        public Module Module { get; set; }
+
+        public virtual RoleModulesHeader RoleModulesHeader { get; set; }
+        public virtual Module Module { get; set; }
 
         public bool New { get; set; } = true;
         public bool Save { get; set; } = true;

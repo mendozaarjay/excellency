@@ -23,10 +23,10 @@ namespace Excellency.Models
         [MaxLength(50)]
         public string MiddleName { get; set; }
 
-        public Company Company { get; set; }
-        public Branch Branch { get; set; }
-        public Department Department { get; set; }
-        public Position Position { get; set; }
+        public virtual Company Company { get; set; }
+        public virtual Branch Branch { get; set; }
+        public virtual Department Department { get; set; }
+        public virtual Position Position { get; set; }
        
 
         public bool IsDeleted { get; set; } = false;

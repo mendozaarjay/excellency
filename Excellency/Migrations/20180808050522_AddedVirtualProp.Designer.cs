@@ -11,9 +11,10 @@ using System;
 namespace Excellency.Migrations
 {
     [DbContext(typeof(EASDbContext))]
-    partial class EASDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180808050522_AddedVirtualProp")]
+    partial class AddedVirtualProp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -309,9 +310,13 @@ namespace Excellency.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
+                    b.Property<int?>("ModulesLineId");
+
                     b.Property<int?>("RoleId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ModulesLineId");
 
                     b.HasIndex("RoleId");
 
@@ -341,8 +346,6 @@ namespace Excellency.Migrations
 
                     b.Property<bool>("Print");
 
-                    b.Property<int?>("RoleModulesHeaderId");
-
                     b.Property<bool>("Save");
 
                     b.Property<bool>("Search");
@@ -350,8 +353,6 @@ namespace Excellency.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ModuleId");
-
-                    b.HasIndex("RoleModulesHeaderId");
 
                     b.ToTable("RoleModulesLine");
                 });
@@ -447,6 +448,10 @@ namespace Excellency.Migrations
 
             modelBuilder.Entity("Excellency.Models.RoleModulesHeader", b =>
                 {
+                    b.HasOne("Excellency.Models.RoleModulesLine", "ModulesLine")
+                        .WithMany()
+                        .HasForeignKey("ModulesLineId");
+
                     b.HasOne("Excellency.Models.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId");
@@ -457,10 +462,6 @@ namespace Excellency.Migrations
                     b.HasOne("Excellency.Models.Module", "Module")
                         .WithMany()
                         .HasForeignKey("ModuleId");
-
-                    b.HasOne("Excellency.Models.RoleModulesHeader", "RoleModulesHeader")
-                        .WithMany()
-                        .HasForeignKey("RoleModulesHeaderId");
                 });
 
             modelBuilder.Entity("Excellency.Models.UserRoleHeader", b =>

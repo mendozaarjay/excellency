@@ -17,6 +17,6 @@ namespace Excellency.Models
         public string ModifiedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public Company Company { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace Excellency.Models
     {
         public int Id { get; set; }
         
-        public Role Role { get; set; }
+        public virtual Role Role { get; set; }
 
         public bool IsDeleted { get; set; } = false;
         public string CreatedBy { get; set; }
