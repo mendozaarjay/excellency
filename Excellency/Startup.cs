@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Excellency.Interfaces;
 using Excellency.Persistence;
+using Excellency.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +27,16 @@ namespace Excellency
         {
             services.AddMvc();
             services.AddSingleton(Configuration);
-            //services.AddScoped<IAttachment, AttachmentService>();
+            services.AddScoped<ICompany, CompanyService>();
+            services.AddScoped<IBranch, BranchService>();
+            services.AddScoped<IDepartment, DepartmentService>();
+            services.AddScoped<IPosition, PositionService>();
+            services.AddScoped<IRole, RoleService>();
+            services.AddScoped<IModule, ModuleService>();
+            services.AddScoped<IAccount, AccountService>();
+            services.AddScoped<IEmployee, EmployeeService>();
+            services.AddScoped<IRoleModuleAssignment, RoleModuleService>();
+            services.AddScoped<IUserRole, UserRoleService>();
 
             services.AddDbContext<EASDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ExcellencyConnection")));
