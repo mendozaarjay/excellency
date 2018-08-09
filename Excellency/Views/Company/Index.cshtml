@@ -1,7 +1,78 @@
-﻿
-@{
+﻿@model Excellency.ViewModels.CompanyIndexViewModel
+
+@{ 
     ViewData["Title"] = "Index";
 }
+<h1>Companies</h1>
+<span>
+    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addnew">
+        Add New
+    </button>
+</span>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Company Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comp in Model.Companies)
+        {
+            <tr>
+                <td>@comp.Id</td>
+                <td>@comp.Description</td>
+                <td><a href="#" data-toggle="modal" data-target="#update" data-whatever="@comp.Description">Edit</a></td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = comp.Id })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- Add New -->
+<div class="modal fade" id="addnew" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    @using (Html.BeginForm())
+    {
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Company</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="companyDescription">Company</label>
+                        <input type="text" name="Description" class="form-control" id="companyDescription" placeholder="Company">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
-<h2>Index</h2>
-
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    @using (Html.BeginForm())
+    {
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Company</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="companyDescription">Company</label>
+                        <input type="text" name="Description" class="form-control" id="companyDescription" placeholder="Company">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
