@@ -53,6 +53,10 @@ namespace Excellency.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Save(BranchViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
             return View();
         }
     }
