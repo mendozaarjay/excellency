@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Excellency.Interfaces;
 using Excellency.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-
+using Excellency.Models;
 namespace Excellency.Controllers
 {
     public class CompanyController : Controller
@@ -29,6 +29,39 @@ namespace Excellency.Controllers
             var model = new CompanyIndexViewModel();
             model.Companies = result;
             return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Save(CompanyViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var company = new Company
+                {
+                    Id = model.Id,
+                    Description = model.Description,
+                };
+                if (model.Id.ToString().Length <= 0)
+                {
+                    _Company.Add(company);
+                }
+                else
+                {
+                    _Company.Update(company);
+                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _Company.RemoveById(id);
+            return RedirectToAction("Index");
         }
     }
 }
