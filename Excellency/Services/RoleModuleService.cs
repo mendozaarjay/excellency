@@ -34,6 +34,16 @@ namespace Excellency.Services
             return _dbContext.RoleModulesLine.Where(a => a.RoleModulesHeader.Id == id && a.IsDeleted == false);
         }
 
+        public Module GetModuleById(int Id)
+        {
+            return _dbContext.Modules.FirstOrDefault(a => a.Id == Id);
+        }
+
+        public Role GetRoleById(int Id)
+        {
+            return _dbContext.Roles.FirstOrDefault(a => a.Id == Id);
+        }
+
         public RoleModulesHeader GetRoleModulesHeaderById(int id)
         {
             return _dbContext.RoleModulesHeader.FirstOrDefault(a => a.Id == id);

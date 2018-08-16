@@ -11,6 +11,8 @@ namespace Excellency.Interfaces
         IEnumerable<RoleModulesLine> GetLineItemsPerHeaderId(int id);
         RoleModulesHeader GetRoleModulesHeaderById(int id);
 
+        Role GetRoleById(int Id);
+        Module GetModuleById(int Id);
         IEnumerable<Role> Roles();
         IEnumerable<Module> Modules();
         void RemoveById(int Id);
