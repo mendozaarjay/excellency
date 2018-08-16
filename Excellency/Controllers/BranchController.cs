@@ -6,6 +6,7 @@ using Excellency.Interfaces;
 using Excellency.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Excellency.Models;
 
 namespace Excellency.Controllers
 {
@@ -55,9 +56,29 @@ namespace Excellency.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                var branch = new Branch
+                {
+                    Id = model.Id,
+                    Description = model.Description,
+                    Company = _Branch.GetCompanyById(int.Parse(model.CompanyId))
+                };
+                if (model.Id.ToString().Length <= 0)
+                {
+                    _Branch.Add(branch);
+                }
+                else
+                {
+                    _Branch.Update(branch);
+                }
             }
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _Branch.RemoveById(id);
+            return RedirectToAction("Index");
         }
     }
 }

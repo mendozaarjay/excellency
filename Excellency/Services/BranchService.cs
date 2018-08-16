@@ -36,6 +36,11 @@ namespace Excellency.Services
             return _dbContext.Branches.FirstOrDefault(x => x.Id == id);
         }
 
+        public Company GetCompanyById(int id)
+        {
+            return _dbContext.Companies.FirstOrDefault(a => a.Id == id);
+        }
+
         public Company GetCompanyPerBranch(int id)
         {
             var comp = _dbContext.Branches

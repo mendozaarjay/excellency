@@ -11,6 +11,7 @@ namespace Excellency.Interfaces
         Branch GetBranchById(int id);
         IEnumerable<Company> Companies();
         Company GetCompanyPerBranch(int id);
+        Company GetCompanyById(int id);
         void RemoveById(int Id);
     }
 }
